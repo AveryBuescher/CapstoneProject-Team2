@@ -65,10 +65,11 @@ def event(request, event_id=None):
     form = EventForm(request.POST or None, instance=instance)
 
     if request.POST and form.is_valid():
-        if '_edit' in request.POST:
-            form.save()
-        elif '_delete' in request.POST:
+        # if '_edit' in request.POST:
+        if '_delete' in request.POST:
             instance.delete()
+        else:
+            form.save()
 
         return HttpResponseRedirect(reverse('cal:calendar'))
 
