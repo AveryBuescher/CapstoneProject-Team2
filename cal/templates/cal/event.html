@@ -28,9 +28,13 @@ Event
     {% csrf_token %}
     <table class="form form-table">
         {{ form }}
-        <tr><td colspan="2"><button type="submit" class="btn btn-info right"> Submit </button></td></tr>
+
+        <tr><td colspan="2"><button type="submit" value="Edit" name="_edit" class="btn btn-info right"> Submit </button></td></tr>
+        <tr><td colspan="2"><button type="submit" value="Delete" name="_delete" class="btn btn-info right"> Delete </button></td></tr>
+
     </table>
 </form>
+
 <div align="center">
     <p>Date and Time Format</p>
     <p1>yyyy-mm-ddThh:mm</p1>

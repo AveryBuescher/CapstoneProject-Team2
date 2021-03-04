@@ -1,4 +1,6 @@
 from datetime import datetime, timedelta, date
+
+from django.db.models import Model
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
@@ -10,8 +12,10 @@ from .models import *
 from .utils import Calendar
 from .forms import EventForm
 
+
 def index(request):
     return HttpResponse('hello')
+
 
 class CalendarView(generic.ListView):
     model = Event
@@ -27,17 +31,20 @@ class CalendarView(generic.ListView):
         context['next_month'] = next_month(d)
         return context
 
+
 def get_date(req_day):
     if req_day:
         year, month = (int(x) for x in req_day.split('-'))
         return date(year, month, day=1)
     return datetime.today()
 
+
 def prev_month(d):
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)
     month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
     return month
+
 
 def next_month(d):
     days_in_month = calendar.monthrange(d.year, d.month)[1]
@@ -46,15 +53,31 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+
 def event(request, event_id=None):
     instance = Event()
+
     if event_id:
         instance = get_object_or_404(Event, pk=event_id)
     else:
         instance = Event()
 
     form = EventForm(request.POST or None, instance=instance)
+
     if request.POST and form.is_valid():
-        form.save()
+        # if '_edit' in request.POST:
+        if '_delete' in request.POST:
+            instance.delete()
+        else:
+            form.save()
+
         return HttpResponseRedirect(reverse('cal:calendar'))
+
     return render(request, 'cal/event.html', {'form': form})
+
+
+
+
+
+
+
