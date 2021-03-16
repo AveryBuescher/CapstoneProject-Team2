@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="82cfbec7-c3a9-4ae0-86b5-742b5594aa71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ProCalendar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ProCalendar.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProCalendar/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ProCalendar/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProCalendar/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ProCalendar/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="82cfbec7-c3a9-4ae0-86b5-742b5594aa71" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +28,9 @@
   </component>
   <component name="JupyterTrust" id="705cea84-8a26-4c17-90a1-200a059e6a0e" />
   <component name="ProjectId" id="1oLuJibMw2qrVz0BBZgQnvByYse" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
