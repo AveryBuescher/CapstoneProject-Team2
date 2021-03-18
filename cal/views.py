@@ -76,7 +76,8 @@ def event(request, event_id=None):
     return render(request, 'cal/event.html', {'form': form})
 
 
-
+def create_user():
+    pass
 
 
 
