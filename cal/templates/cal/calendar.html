@@ -1,18 +1,20 @@
 {% extends 'cal/base.html' %}
 
 {% block title %}
-Calendar
+    Calendar
 {% endblock %}
 
+
 {% block content %}
-<div align="center">
-<p>Logged in as {{ user.get_username }}</p>
-</div>
-<div class="clearfix">
-	<a class="btn btn-info left" href="{% url 'cal:calendar' %}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{% url 'cal:calendar' %}?{{ next_month }}"> Next Month </a>
-	<a class="btn btn-info right" href="{% url 'cal:event_new' %}"> New Event </a>
-</div>
+    <div class="accountInfo">
+        Logged in as {{ user.get_username }}
+        <a class="btn btn-info" href="{% url 'logout' %}"> Logout </a>
+    </div>
+    <div class="clearfix">
+        <a class="btn btn-info left" href="{% url 'cal:calendar' %}?{{ prev_month }}"> Previous Month </a>
+        <a class="btn btn-info left" href="{% url 'cal:calendar' %}?{{ next_month }}"> Next Month </a>
+        <a class="btn btn-info right" href="{% url 'cal:event_new' %}"> New Event </a>
+    </div>
 
 {{ calendar }}
 {% endblock %}
