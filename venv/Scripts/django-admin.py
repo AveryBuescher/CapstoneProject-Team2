@@ -1,4 +1,4 @@
-#!E:\Menu\Programming\Python Programs\ProCalendar\venv\Scripts\python.exe
+#!E:\Menu\GitHub_Repositories\CapstoneProject-Team2\venv\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

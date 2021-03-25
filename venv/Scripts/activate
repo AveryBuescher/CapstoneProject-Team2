@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="E:\Menu\Programming\Python Programs\ProCalendar\venv"
+VIRTUAL_ENV="E:\Menu\GitHub_Repositories\CapstoneProject-Team2\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

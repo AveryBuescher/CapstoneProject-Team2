@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82cfbec7-c3a9-4ae0-86b5-742b5594aa71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ProCalendar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ProCalendar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProCalendar/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ProCalendar/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProCalendar/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ProCalendar/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cal/static/cal/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/cal/static/cal/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cal/templates/cal/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/cal/calendar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cal/templates/cal/event.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/cal/event.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cal/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/registration/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -41,10 +46,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="sqlite" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Programming/Python Programs/DjangoTutorial" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -62,7 +69,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="ProCalendar.settings" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="E:\Menu\GitHub_Repositories\CapstoneProject-Team2\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -89,6 +96,13 @@
       <updated>1613078121374</updated>
       <workItem from="1613078176043" duration="18000" />
       <workItem from="1614115030347" duration="7828000" />
+      <workItem from="1614631075174" duration="58000" />
+      <workItem from="1614631161101" duration="595000" />
+      <workItem from="1615755398860" duration="300000" />
+      <workItem from="1615922779109" duration="1270000" />
+      <workItem from="1616040245955" duration="4142000" />
+      <workItem from="1616092410170" duration="3532000" />
+      <workItem from="1616528027646" duration="3347000" />
     </task>
     <servers />
   </component>

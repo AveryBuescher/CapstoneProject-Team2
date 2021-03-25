@@ -55,13 +55,12 @@ def next_month(d):
 
 
 def event(request, event_id=None):
-    instance = Event()
 
     if event_id:
         instance = get_object_or_404(Event, pk=event_id)
     else:
         instance = Event()
-
+    instance.the_user = get_object_or_404(User, pk=request.user.id)
     form = EventForm(request.POST or None, instance=instance)
 
     if request.POST and form.is_valid():
@@ -76,7 +75,8 @@ def event(request, event_id=None):
     return render(request, 'cal/event.html', {'form': form})
 
 
-
+def create_user():
+    pass
 
 
 
