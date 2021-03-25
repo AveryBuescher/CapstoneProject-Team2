@@ -1,16 +1,19 @@
 from datetime import datetime, timedelta, date
 
 from django.db.models import Model
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import calendar
+from django.contrib import messages
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 from .models import *
 from .utils import Calendar
-from .forms import EventForm
+from .forms import EventForm, CreateUserForm
 
 
 def index(request):
@@ -53,7 +56,7 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
-
+@login_required(login_url='login')
 def event(request, event_id=None):
 
     if event_id:
@@ -75,8 +78,19 @@ def event(request, event_id=None):
     return render(request, 'cal/event.html', {'form': form})
 
 
-def create_user():
-    pass
+def registerPage(request):
+    form = CreateUserForm
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + username)
+            return redirect('login')
+
+    context = {'form':form}
+    return render(request, 'registration/register.html', context)
 
 
 
