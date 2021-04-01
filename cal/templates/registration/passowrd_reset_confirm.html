@@ -1,6 +1,8 @@
 {% extends "cal/base.html" %}
 
 {% block content %}
+    <div style="text-align: center;">
+    <div style="display:inline-block; text-align: left;">
     {% if validlink %}
         <p>Please enter (and confirm) your new password.</p>
         <form action="" method="post">
@@ -26,4 +28,6 @@
         <h1>Password reset failed</h1>
         <p>The password reset link was invalid, possibly because it has already been used. Please request a new password reset.</p>
     {% endif %}
+    </div>
+    </div>
 {% endblock %}

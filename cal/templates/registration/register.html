@@ -1,7 +1,8 @@
 {% extends "cal/base.html" %}
 
 {% block content %}
-
+<div style="text-align: center;">
+<div style="display:inline-block; text-align: left;">
 <h3>Register</h3>
 
 <form method="POST">
@@ -31,5 +32,6 @@
 
     <p></p>
     <p><a href="{% url 'login' %}">Already have an account?</a></p>
-
+</div>
+</div>
 {% endblock content %}
