@@ -1,7 +1,9 @@
 {% extends "cal/base.html" %}
 
-{% block content %}
 
+{% block content %}
+<div style="text-align: center;">
+<div style="display:inline-block; text-align: left;">
   {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
   {% endif %}
@@ -34,6 +36,6 @@
   {# Assumes you setup the password_reset view in your URLconf #}
   <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
   <p><a href="{% url 'cal:registerPage' %}">Don't have an account</a></p>
-
-
+</div>
+</div>
 {% endblock %}
