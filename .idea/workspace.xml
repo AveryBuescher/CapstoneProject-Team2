@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="82cfbec7-c3a9-4ae0-86b5-742b5594aa71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cal/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/registration/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cal/templates/registration/passowrd_reset_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/registration/passowrd_reset_confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cal/templates/registration/password_reset_complete.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/registration/password_reset_complete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cal/templates/registration/password_reset_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/registration/password_reset_done.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cal/templates/registration/password_reset_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/registration/password_reset_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cal/templates/registration/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/registration/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cal/templates/registration/logged_out.html" beforeDir="false" afterPath="$PROJECT_DIR$/cal/templates/registration/logged_out.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +97,7 @@
       <workItem from="1616528027646" duration="3347000" />
       <workItem from="1616702212418" duration="1513000" />
       <workItem from="1617302496460" duration="1337000" />
-      <workItem from="1617303898188" duration="3815000" />
+      <workItem from="1617303898188" duration="3974000" />
     </task>
     <servers />
   </component>
