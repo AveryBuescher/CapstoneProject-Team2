@@ -5,9 +5,10 @@ Event
 {% endblock %}
 
 {% block content %}
-<div class="clearfix">
-  <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
-</div>
+    <div class="clearfix">
+        <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
+    </div>
+
 
 {% if form.errors %}
     {% for field in form %}
@@ -28,16 +29,19 @@ Event
     {% csrf_token %}
     <table class="form form-table">
         {{ form }}
+        <tr>
+            <td colspan="2">
+                <button type="submit" value="Edit" name="_edit" class="btn btn-info right"> Submit </button>
+                <button type="submit" value="Delete" name="_delete" class="btn btn-info right"> Delete </button>
+            </td>
+        </tr>
 
-        <tr><td colspan="2"><button type="submit" value="Edit" name="_edit" class="btn btn-info right"> Submit </button></td></tr>
-        <tr><td colspan="2"><button type="submit" value="Delete" name="_delete" class="btn btn-info right"> Delete </button></td></tr>
 
     </table>
 </form>
 
 <div align="center">
-    <p>Date and Time Format</p>
-    <p1>yyyy-mm-ddThh:mm</p1>
+    <p>Logged in as {{ user.get_username }}</p>
 </div>
 {% endblock %}
 

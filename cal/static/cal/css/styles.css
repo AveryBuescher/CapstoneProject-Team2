@@ -19,8 +19,14 @@ body {
   margin-right: 3px;
 }
 
+.accountInfo{
+  text-align: right;
+  margin: 15px;
+}
+
 .clearfix {
   margin: 15px;
+  text-align: center;
 }
 
 .form {

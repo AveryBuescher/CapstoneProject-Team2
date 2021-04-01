@@ -1,16 +1,19 @@
 from datetime import datetime, timedelta, date
 
 from django.db.models import Model
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import calendar
+from django.contrib import messages
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 from .models import *
 from .utils import Calendar
-from .forms import EventForm
+from .forms import EventForm, CreateUserForm
 
 
 def index(request):
@@ -24,7 +27,7 @@ class CalendarView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get('month', None))
-        cal = Calendar(d.year, d.month)
+        cal = Calendar(d.year, d.month, self.request.user.id)
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
@@ -53,15 +56,14 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
-
+@login_required(login_url='login')
 def event(request, event_id=None):
-    instance = Event()
 
     if event_id:
         instance = get_object_or_404(Event, pk=event_id)
     else:
         instance = Event()
-
+    instance.the_user = get_object_or_404(User, pk=request.user.id)
     form = EventForm(request.POST or None, instance=instance)
 
     if request.POST and form.is_valid():
@@ -76,7 +78,19 @@ def event(request, event_id=None):
     return render(request, 'cal/event.html', {'form': form})
 
 
+def registerPage(request):
+    form = CreateUserForm
 
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + username)
+            return redirect('login')
+
+    context = {'form':form}
+    return render(request, 'registration/register.html', context)
 
 
 
