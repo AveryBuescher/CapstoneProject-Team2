@@ -19,11 +19,6 @@ body {
   margin-right: 3px;
 }
 
-.accountInfo{
-  text-align: right;
-  margin: 15px;
-}
-
 .clearfix {
   margin: 15px;
   text-align: center;
@@ -40,6 +35,15 @@ body {
   background: none;
   padding: 5px;
   width: 100%;
+}
+
+.divContainer{
+  text-align: center;
+}
+
+.registration{
+  display:inline-block;
+  text-align: left;
 }
 
 /* App styles */
@@ -89,4 +93,21 @@ a {
 
 #dateTimeFormat {
   text-align: center;
+}
+
+.accountInfo{
+  text-align: right;
+  margin: 15px;
+}
+
+.settings {
+  display:block;
+  text-align: center;
+  margin: 15px;
+}
+
+.settingsHeader{
+  display:block;
+  text-align: left;
+  margin: 15px;
 }

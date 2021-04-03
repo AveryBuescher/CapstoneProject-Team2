@@ -1,37 +1,40 @@
 {% extends "cal/base.html" %}
 
+{% block title %}
+    Register
+{% endblock %}
+
 {% block content %}
-<div style="text-align: center;">
-<div style="display:inline-block; text-align: left;">
-<h3>Register</h3>
+    <div class="divContainer">
+        <div class="registration">
 
-<form method="POST">
-    {% csrf_token %}
-    {% for field in form %}
-        <p>{{ field.label }}    {{ field }}</p>
-    {% endfor %}
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <p>{{ field.label }}    {{ field }}</p>
+                {% endfor %}
 
-    <p>Username requirements</p>
-    <ul>
-        <li>150 characters or fewer</li>
-        <li>Only Letters, digits and these symbols(@, ., +, -, _)</li>
-    </ul>
+                <p>Username requirements</p>
+                <ul>
+                    <li>150 characters or fewer</li>
+                    <li>Only Letters, digits and these symbols(@, ., +, -, _)</li>
+                </ul>
 
-    <p>Password requirements</p>
-    <ul>
-        <li>Cannot be too similar to your other personal information</li>
-        <li>Must contain at least 8 characters</li>
-        <li>Cannot be a commonly used password</li>
-        <li>Cannot be entirely numeric</li>
-    </ul>
+                <p>Password requirements</p>
+                <ul>
+                    <li>Cannot be too similar to your other personal information</li>
+                    <li>Must contain at least 8 characters</li>
+                    <li>Cannot be a commonly used password</li>
+                    <li>Cannot be entirely numeric</li>
+                </ul>
 
-    <input type="submit" name="Create User">
-</form>
+                <input class="btn btn-info" type="submit" name="Create User">
+            </form>
 
-    {{ form.errors }}
+            {{ form.errors }}
 
-    <p></p>
-    <p><a href="{% url 'login' %}">Already have an account?</a></p>
-</div>
-</div>
+            <p></p>
+            <p><a class="btn btn-info" href="{% url 'login' %}">Already have an account?</a></p>
+        </div>
+    </div>
 {% endblock content %}

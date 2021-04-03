@@ -1,10 +1,13 @@
 {% extends "cal/base.html" %}
 
+{% block title %}
+    Logged Out!
+{% endblock %}
+
 {% block content %}
-    <div style="text-align: center;">
-    <div style="display:inline-block; text-align: left;">
-  <p>Logged out!</p>
-  <a href="{% url 'login'%}">Click here to login again.</a>
-    </div>
+    <div class="divContainer">
+        <div class="registration">
+            <a class="btn btn-info" href="{% url 'login'%}">Click here to login again.</a>
+        </div>
     </div>
 {% endblock %}

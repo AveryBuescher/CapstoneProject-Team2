@@ -8,7 +8,7 @@
 {% block content %}
     <div class="accountInfo">
         Logged in as {{ user.get_username }}
-        <a class="btn btn-info" href="{% url 'logout' %}"> Logout </a>
+        <a class="btn btn-info" href="{% url 'cal:settingsPage' %}"> Settings </a>
     </div>
     <div class="clearfix">
         <a class="btn btn-info left" href="{% url 'cal:calendar' %}?{{ prev_month }}"> Previous Month </a>

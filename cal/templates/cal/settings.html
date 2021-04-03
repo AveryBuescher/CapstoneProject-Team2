@@ -1,0 +1,33 @@
+{% extends 'cal/base.html' %}
+
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block content %}
+    <div class="divContainer">
+
+        <div class="clearfix">
+            <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
+        </div>
+
+        <h1 class="settingsHeader">
+            Other Settings
+        </h1>
+        <hr>
+        <div class="settings">
+            <p>Other Settings</p>
+        </div>
+
+        <h1 class="settingsHeader">
+            Logout
+        </h1>
+        <hr>
+        <div class="settings">
+            <a class="btn btn-info" href="{% url 'logout' %}"> Logout </a>
+        </div>
+
+    </div>
+{% endblock %}
+
+
