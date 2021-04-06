@@ -92,6 +92,8 @@ def registerPage(request):
     context = {'form':form}
     return render(request, 'registration/register.html', context)
 
+def settingsPage(request):
 
+    return render(request, 'cal/settings.html')
 
 
