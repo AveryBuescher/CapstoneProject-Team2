@@ -2,31 +2,12 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="db" uuid="2c25a5c9-d0f7-415c-913e-571d525c6e88">
-      <database-info product="SQLite" version="3.34.0" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.34.0" dbms="SQLITE" exact-version="3.34.0" exact-driver-version="3.34">
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema" qname="@" />
-        </introspection-scope>
-      </schema-mapping>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
+      <schema-mapping />
     </data-source>
     <data-source name="db [2]" uuid="6664b954-b6e0-4633-a2ce-fb321c85eae8">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
       <schema-mapping />
-    </data-source>
-    <data-source name="db [3]" uuid="766a2b3c-005a-42a8-918a-a545857f1aea">
-      <database-info product="SQLite" version="3.34.0" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.34.0" dbms="SQLITE" exact-version="3.34.0" exact-driver-version="3.34">
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
-      <auth-provider>no-auth</auth-provider>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema" qname="@" />
-        </introspection-scope>
-      </schema-mapping>
     </data-source>
   </component>
 </project>
