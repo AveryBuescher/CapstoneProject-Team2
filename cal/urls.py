@@ -15,6 +15,8 @@ urlpatterns = [
 
     path('register/', views.registerPage, name='registerPage'),
 
+    path('settings/', views.settingsPage, name='settingsPage'),
+
 
 ]
 
