@@ -127,6 +127,8 @@ def add_event_to_google(event_id, gcalendar_id="primary"):
 
 def sync_menu(request):
     #add_event_to_google(2)
+    print(f'USER ID:{request.user.id}')
+    print(f'USER NAME:{request.user.username}')
     return render(request, 'sync/sync_menu.html')
 
 
