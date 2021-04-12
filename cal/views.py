@@ -96,4 +96,5 @@ def settingsPage(request):
 
     return render(request, 'cal/settings.html')
 
-
+def sync(request):
+    return render(request, 'sync/sync_menu.html')

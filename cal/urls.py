@@ -17,6 +17,12 @@ urlpatterns = [
 
     path('settings/', views.settingsPage, name='settingsPage'),
 
+    path('sync/', views.sync)
+
+
+
+
+
 
 ]
 
