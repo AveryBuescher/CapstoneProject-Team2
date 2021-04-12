@@ -33,7 +33,7 @@ body.dark-theme {
   font-family: "ptsans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-body {
+body, div {
   background: var(--bkg-color);
 }
 
@@ -41,7 +41,7 @@ hr {
   border-color: var(--border-color);
 }
 
-h1, p, li {
+h1, p, li, div {
   color: var(--text-color);
 }
 
@@ -175,7 +175,7 @@ a {
 .page-todo .tasks {
     background: #fff;
     padding: 0;
-    border-right: 1px solid #d1d4d7;
+    border-right: 1px solid var(--border-color);
     margin: -30px 15px -30px -15px
 }
 
@@ -228,7 +228,7 @@ a {
 }
 
 .page-todo .task {
-    border-bottom: 1px solid #e4e5e6;
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 1px;
     position: relative
 }
