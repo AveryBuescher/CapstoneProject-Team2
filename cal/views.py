@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from datetime import datetime, timedelta, date
 
 from django.db.models import Model
@@ -14,6 +16,11 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .utils import Calendar
 from .forms import EventForm, CreateUserForm
+
+from datetime import datetime, timedelta
+from cal.gcal_sync.format_datetime import format_datetime
+from cal.gcal_sync.get_credentials import get_credentials
+from googleapiclient.discovery import build
 
 
 def index(request):
@@ -96,5 +103,30 @@ def settingsPage(request):
 
     return render(request, 'cal/settings.html')
 
-def sync(request):
+
+"""Stuff needed for syncing"""
+def add_event_to_google(event_id, gcalendar_id="primary"):
+    calendar_event = Event.objects.get(id=event_id)
+
+    creds = get_credentials()
+    print(creds)
+    service = build('calendar', 'v3', credentials=creds)
+
+    event_body = {
+        "kind": "calendar#event",
+        "start": {"dateTime": format_datetime(
+            calendar_event.start_time)},
+        "end": {"dateTime": format_datetime(calendar_event.end_time)},
+        "summary": calendar_event.description
+    }
+
+    event = service.events().insert(calendarId=gcalendar_id,
+                                    body=event_body).execute()
+    return event
+
+
+def sync_menu(request):
+    #add_event_to_google(2)
     return render(request, 'sync/sync_menu.html')
+
+

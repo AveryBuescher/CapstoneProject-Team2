@@ -17,7 +17,7 @@ urlpatterns = [
 
     path('settings/', views.settingsPage, name='settingsPage'),
 
-    path('sync/', views.sync)
+    path('sync/', views.sync_menu)
 
 
 
