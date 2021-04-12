@@ -55,14 +55,14 @@ class Tasks:
 		day_str = ''
 		for event in events_per_day:
 			event_date = str(event.start_time.month)+'/'+str(event.start_time.day)+'/'+str(event.start_time.year)
-			day_str += f'<div class="task low"><div class="desc"><div class="title">{event.title}</div><div>{event.description}</div></div><div class="time"><div class="date">{event_date}</div></div></div>'
+			day_str += f'<div class="task low"><div class="desc"><div class="title" style="margin:0px;text-align:left">{event.title}</div><div>{event.description}</div></div><div class="time"><div class="date">{event_date}</div></div></div>'
 		return day_str
 
 	# formats a week as a tr
 	def formatweek(self):
 		events = Event.objects.filter(the_user=self.userid)
 		d = str(self.month) + '/' + str(self.day)
-		week = f'<h1 style="text-align:center">Week starting at {d}</h1><div class="container page-todo bootstrap snippets bootdeys"><div class="col-sm-7 tasks"><div class="task-list">'
+		week = f'<h1 style="text-align:center">Week starting at {d}</h1><hr><div class="container page-todo bootstrap snippets bootdeys" style="display:inline-block;margin-top:25px;text-align:left;font-weight:bold"><div class="col-sm-7 tasks"><div class="task-list">'
 		current_date = date(self.year,self.month,self.day)
 		for n in range(7):
 			week += self.formatday(current_date+timedelta(days=n), events)

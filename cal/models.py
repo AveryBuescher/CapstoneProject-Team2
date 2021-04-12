@@ -10,6 +10,7 @@ class Event(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     the_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    #category = models.TextField() #String representing event type (let users type category or use drop down list?)
 
     @property
     def get_html_url(self):

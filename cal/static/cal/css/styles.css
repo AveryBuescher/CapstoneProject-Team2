@@ -166,6 +166,12 @@ a {
 
 /* Task list stuff */
 
+.page-todo .container {
+    display:inline-block;
+    margin-top:25px;
+    text-align:left
+}
+
 .page-todo .tasks {
     background: #fff;
     padding: 0;
@@ -268,7 +274,7 @@ a {
 }
 
 .page-todo .task.low {
-    border-left: 2px solid #4dbd74
+    border-left: 5px solid #4dbd74
 }
 
 .page-todo .timeline {
