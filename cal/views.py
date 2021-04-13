@@ -125,11 +125,31 @@ def add_event_to_google(event_id, gcalendar_id="primary"):
     return event
 
 
+# Returns a list of events that start on or after start_date and end
+# on or before end_date
+def filter_events_by_date(start_date, end_date):
+    start_datetime = datetime(start_date.year, start_date.month,
+                              start_date.day)
+    maxtime = datetime.max
+    end_datetime = datetime(end_date.year, end_date.month,
+                            end_date.day, maxtime.hour,
+                            maxtime.minute, maxtime.second,
+                            maxtime.microsecond)
+    event_list = Event.objects.filter(start_time__range=(
+        start_datetime, end_datetime))
+    return event_list
+
+
+def add_events_to_google(start_date, end_date):
+    return
+
+
 def sync_menu(request):
     #add_event_to_google(2)
     print(f'USER ID:{request.user.id}')
     print(f'USER NAME:{request.user.username}')
     return render(request, 'sync/sync_menu.html')
+
 
 def dummy_action(request):
     print('AAAAAAAAAAAAAAAAAAAA')
