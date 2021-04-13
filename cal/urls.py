@@ -17,7 +17,9 @@ urlpatterns = [
 
     path('settings/', views.settingsPage, name='settingsPage'),
 
-    path('sync/', views.sync_menu)
+    path('sync/', views.sync_menu),
+
+    path('base/', views.dummy_action, name='dummy_action')
 
 
 

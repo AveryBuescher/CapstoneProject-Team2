@@ -131,4 +131,9 @@ def sync_menu(request):
     print(f'USER NAME:{request.user.username}')
     return render(request, 'sync/sync_menu.html')
 
+def dummy_action(request):
+    print('AAAAAAAAAAAAAAAAAAAA')
+    print(request.POST['foobar'])
+    return render(request, 'sync/sync_menu.html')
+
 

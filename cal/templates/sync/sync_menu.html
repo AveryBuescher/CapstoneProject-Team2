@@ -1,6 +1,10 @@
 {% extends "cal/base.html" %}
 {% block content %}
-    <p>This is a test page</p>
+    <form action="{% url 'cal:dummy_action' %}" method="post">
+    {% csrf_token %}
+        <input type="text" name="foobar">
+        <input type="submit" value="submit">
+    </form>
     {{ user.username }}
     {{ user.id }}
 {% endblock %}
