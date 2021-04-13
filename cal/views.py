@@ -135,8 +135,11 @@ def filter_events_by_date(start_date, end_date):
                             end_date.day, maxtime.hour,
                             maxtime.minute, maxtime.second,
                             maxtime.microsecond)
-    event_list = Event.objects.filter(start_time__range=(
+    event_list_a = Event.objects.filter(start_time__range=(
         start_datetime, end_datetime))
+    event_list_b = Event.objects.filter(end_time__range=(
+        start_datetime, end_datetime))
+    event_list = list(set(event_list_a).intersection(set(event_list_b)))
     return event_list
 
 
