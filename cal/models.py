@@ -9,8 +9,11 @@ class Event(models.Model):
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    CATEGORY_CHOICES = [("IMPORTANT", "Important"), ("TENTATIVE", "Tentative"), ("RECURRENT", "Recurrent"), ("NORMAL", "Normal")]
+    category = models.CharField(max_length=40, choices=CATEGORY_CHOICES, default="NORMAL")
+    COLOR_CHOICES = [("WHITE","WHITE"),("RED","RED"), ("GREEN", "GREEN"), ("BLUE", "BLUE")]
+    color = models.CharField(max_length=40, choices=COLOR_CHOICES, default="WHITE")
     the_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    #category = models.TextField() #String representing event type (let users type category or use drop down list?)
 
     @property
     def get_html_url(self):
