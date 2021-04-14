@@ -2,10 +2,8 @@
 {% block content %}
     <form action="{% url 'cal:dummy_action' %}" method="post">
     {% csrf_token %}
-        <input type="text" name="foobar">
-        <input type="date" name="start_date">
-        <input type="submit" value="submit">
+        <input type="date" name="start_date"><br>
+        <input type="date" name="end_date"><br>
+        <input type="submit" value="submit"><br>
     </form>
-    {{ user.username }}
-    {{ user.id }}
 {% endblock %}
