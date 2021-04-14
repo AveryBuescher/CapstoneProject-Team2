@@ -111,28 +111,6 @@ def settingsPage(request):
 
 
 """Stuff needed for syncing"""
-
-
-def add_event_to_google(event_id, gcalendar_id="primary"):
-    calendar_event = Event.objects.get(id=event_id)
-
-    creds = get_credentials()
-    print(creds)
-    service = build('calendar', 'v3', credentials=creds)
-
-    event_body = {
-        "kind": "calendar#event",
-        "start": {"dateTime": format_datetime(
-            calendar_event.start_time)},
-        "end": {"dateTime": format_datetime(calendar_event.end_time)},
-        "summary": calendar_event.description
-    }
-
-    event = service.events().insert(calendarId=gcalendar_id,
-                                    body=event_body).execute()
-    return event
-
-
 # Returns a list of events that start on or after start_date and end
 # on or before end_date
 def filter_events_by_date(start_date, end_date, user_id):
@@ -212,7 +190,8 @@ def get_credentials():
             flow = InstalledAppFlow.from_client_secrets_file(
                 join(dirname(__file__), "credentials.json"), SCOPES)
             creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
-        with open("token.json", 'w') as token:
-            token.write(creds.to_json())
+
+        # Save the credentials for the next run (re-enable later)
+        #with open("token.json", 'w') as token:
+            #token.write(creds.to_json())
     return creds
