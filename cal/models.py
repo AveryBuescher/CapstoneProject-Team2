@@ -9,9 +9,9 @@ class Event(models.Model):
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    CATEGORY_CHOICES = [("IMPORTANT", "Important"), ("TENTATIVE", "Tentative"), ("RECURRENT", "Recurrent"), ("NORMAL", "Normal")]
+    CATEGORY_CHOICES = [("Important", "Important"), ("Tentative", "Tentative"), ("Recurrent", "Recurrent"), ("Normal", "Normal")]
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES, default="NORMAL")
-    COLOR_CHOICES = [("WHITE","WHITE"),("RED","RED"), ("GREEN", "GREEN"), ("BLUE", "BLUE")]
+    COLOR_CHOICES = [("dddddd","WHITE"),("ff4444","RED"), ("44ff44", "GREEN"), ("4444ff", "BLUE")]
     color = models.CharField(max_length=40, choices=COLOR_CHOICES, default="WHITE")
     the_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 

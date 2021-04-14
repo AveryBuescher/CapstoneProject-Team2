@@ -16,7 +16,7 @@ class Calendar(HTMLCalendar):
 		events_per_day = events.filter(start_time__day=day)
 		d = ''
 		for event in events_per_day:
-			d += f'<li> {event.get_html_url} </li>'
+			d += f'<li style="list-style-type:none; border-left: 7px solid #{event.color}; padding-left:5px"> {event.get_html_url} </li>'
 
 		if day != 0:
 			return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
@@ -55,7 +55,7 @@ class Tasks:
 		day_str = ''
 		for event in events_per_day:
 			event_date = str(event.start_time.month)+'/'+str(event.start_time.day)+'/'+str(event.start_time.year)
-			day_str += f'<div class="task low"><div class="desc"><div class="title" style="margin:0px;text-align:left">{event.title}</div><div>{event.description}</div></div><div class="time"><div class="date">{event_date}</div></div></div>'
+			day_str += f'<div class="task low" style="border-left: 5px solid #{event.color}"><div class="desc"><div class="title" style="margin:0px;text-align:left">{event.get_html_url}</div><div style="font-style:italic">{event.category}</div><div>{event.description}</div></div><div class="time"><div class="date">{event_date}</div></div></div>'
 		return day_str
 
 	# formats a week as a tr
