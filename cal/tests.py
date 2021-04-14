@@ -4,9 +4,10 @@ from .models import Event
 from .views import filter_events_by_date
 from datetime import datetime, time, date
 
-# Create your tests here.
-class EventFilterTest(TestCase):
 
+# Create your tests here.
+# Tests for filtering events by date
+class EventFilterTest(TestCase):
     def quick_event_create(self, start_datetime, end_datetime):
         foo = Event(title="Test Event", description="Test Event",
                     start_time = start_datetime,
