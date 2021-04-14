@@ -1,8 +1,8 @@
 {% extends "cal/base.html" %}
 {% block content %}
-    <form action="{% url 'cal:dummy_action' %}" method="post">
+    <form action="{% url 'cal:add_events_to_google' %}" method="post">
     {% csrf_token %}
-        <input type="date" name="start_date"><br>
+        <input type="date" id="start_date" name="start_date"><br>
         <input type="date" name="end_date"><br>
         <input type="submit" value="submit"><br>
     </form>

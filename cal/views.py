@@ -17,10 +17,14 @@ from .models import *
 from .utils import Calendar
 from .forms import EventForm, CreateUserForm
 
-from datetime import datetime, timedelta
 from cal.gcal_sync.format_datetime import format_datetime
-from cal.gcal_sync.get_credentials import get_credentials
 from googleapiclient.discovery import build
+import os.path
+from os.path import dirname, join
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+
 
 
 def index(request):
@@ -143,8 +147,36 @@ def filter_events_by_date(start_date, end_date):
     return event_list
 
 
-def add_events_to_google(start_date, end_date):
-    return
+# Adds events that fall within a date-range specified by the user from
+# the app to google calendar.
+def add_events_to_google(request):
+    creds = get_credentials()
+    service = build('calendar', 'v3', credentials=creds)
+    event_list = filter_events_by_date(date.fromisoformat(
+        request.POST['start_date']),
+        date.fromisoformat(request.POST['end_date']))
+
+    for i in event_list:
+        event_body = {
+            "kind": "calendar#event",
+            "start": {"dateTime": format_datetime(
+                i.start_time)},
+            "end": {
+                "dateTime": format_datetime(i.end_time)},
+            "summary": i.description
+        }
+        # Delete event from google calendar if it has already been
+        # added to google calendar (add later)
+
+        # Add event to google calendar
+        event = service.events().insert(calendarId='primary',
+                                        body=event_body).execute()
+
+        # Record event's google calendar event id (add later)
+
+
+
+    return redirect('cal:sync_menu')
 
 
 def sync_menu(request):
@@ -153,10 +185,24 @@ def sync_menu(request):
     print(f'USER NAME:{request.user.username}')
     return render(request, 'sync/sync_menu.html')
 
-
-def dummy_action(request):
-    print('AAAAAAAAAAAAAAAAAAAA')
-    print(request.POST['foobar'])
-    return render(request, 'sync/sync_menu.html')
-
-
+def get_credentials():
+    print(dirname(__file__))
+    SCOPES = ['https://www.googleapis.com/auth/calendar']
+    #cred_filepath = join(dirname(__file__), "credentials.json")
+    #token_filepath = join(dirname(__file__), "token.json")
+    creds = None
+    if os.path.exists("token.json"):
+        creds = Credentials.from_authorized_user_file("token.json",
+                                                      SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                join(dirname(__file__), "credentials.json"), SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open("token.json", 'w') as token:
+            token.write(creds.to_json())
+    return creds
