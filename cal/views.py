@@ -175,7 +175,6 @@ def add_events_to_google(request):
         # Record event's google calendar event id (add later)
 
 
-
     return redirect('cal:sync_menu')
 
 
