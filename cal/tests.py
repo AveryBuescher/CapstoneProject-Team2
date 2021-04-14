@@ -50,5 +50,5 @@ class EventFilterTest(TestCase):
     def test_wrong_user(self):
         foo = self.quick_event_create(date(2021, 1, 5), date(2021, 1,
                                                         5), self.b_id)
-        self.quick_assert_in_range(foo, False, self.b_id)
+        self.quick_assert_in_range(foo, False, self.a_id)
 

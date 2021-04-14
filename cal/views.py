@@ -145,7 +145,7 @@ def filter_events_by_date(start_date, end_date, user_id):
                             maxtime.microsecond)
     event_list = Event.objects.filter(start_time__range=(
         start_datetime, end_datetime)).filter(end_time__range=(
-        start_datetime, end_datetime)).filter(id=user_id)
+        start_datetime, end_datetime)).filter(the_user_id=user_id)
 
     return event_list
 
@@ -159,14 +159,21 @@ def add_events_to_google(request):
         request.POST['start_date']),
         date.fromisoformat(request.POST['end_date']), request.user.id)
 
+    print(len(event_list))
+
     for i in event_list:
+        print('AAAAAAAABBBBBBBCCCCCCC')
+        print(i.start_time)
+        print(i.end_time)
+        print(i.description)
         event_body = {
             "kind": "calendar#event",
             "start": {"dateTime": format_datetime(
                 i.start_time)},
             "end": {
                 "dateTime": format_datetime(i.end_time)},
-            "summary": i.description
+            "summary": i.title,
+            "description": i.description
         }
         # Delete event from google calendar if it has already been
         # added to google calendar (add later)
