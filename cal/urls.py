@@ -18,17 +18,6 @@ urlpatterns = [
 
     path('settings/', views.settingsPage, name='settingsPage'),
 
-    path('sync/', views.sync_menu, name='sync_menu'),
-
-    path('sync/add_to_google', views.add_events_to_google,
-         name='add_events_to_google')
-
-    #path('base/', views.dummy_action, name='dummy_action')
-
-
-
-
-
 
 ]
 

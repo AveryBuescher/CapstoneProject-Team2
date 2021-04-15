@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 from datetime import datetime, timedelta, date
 
 from django.db.models import Model
@@ -16,14 +14,6 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .utils import Calendar, Tasks
 from .forms import EventForm, CreateUserForm
-
-from cal.gcal_sync.format_datetime import format_datetime
-from googleapiclient.discovery import build
-import os.path
-from os.path import dirname, join
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
 
 
 def index(request):
@@ -67,7 +57,6 @@ def next_month(d):
     return month
 
 
-<<<<<<< HEAD
 class TaskView(generic.ListView):
     model = Event
     template_name = 'cal/taskview.html'
@@ -103,10 +92,9 @@ def next_week(d):
     return date
 
 
-=======
->>>>>>> main
 @login_required(login_url='login')
 def event(request, event_id=None):
+
     if event_id:
         instance = get_object_or_404(Event, pk=event_id)
     else:
@@ -134,99 +122,14 @@ def registerPage(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request,'Account was created for ' + username)
+            messages.success(request, 'Account was created for ' + username)
             return redirect('login')
 
     context = {'form':form}
     return render(request, 'registration/register.html', context)
 
-
 def settingsPage(request):
+
     return render(request, 'cal/settings.html')
 
 
-"""Stuff needed for syncing"""
-# Returns a list of events that start on or after start_date and end
-# on or before end_date
-def filter_events_by_date(start_date, end_date, user_id):
-    start_datetime = datetime(start_date.year, start_date.month,
-                              start_date.day)
-    maxtime = datetime.max
-    end_datetime = datetime(end_date.year, end_date.month,
-                            end_date.day, maxtime.hour,
-                            maxtime.minute, maxtime.second,
-                            maxtime.microsecond)
-    event_list = Event.objects.filter(start_time__range=(
-        start_datetime, end_datetime)).filter(end_time__range=(
-        start_datetime, end_datetime)).filter(the_user_id=user_id)
-
-    return event_list
-
-
-# Adds events that fall within a date-range specified by the user from
-# the app to google calendar.
-def add_events_to_google(request):
-    creds = get_credentials()
-    service = build('calendar', 'v3', credentials=creds)
-    event_list = filter_events_by_date(date.fromisoformat(
-        request.POST['start_date']),
-        date.fromisoformat(request.POST['end_date']), request.user.id)
-
-    print(len(event_list))
-
-    for i in event_list:
-        print('AAAAAAAABBBBBBBCCCCCCC')
-        print(i.start_time)
-        print(i.end_time)
-        print(i.description)
-        event_body = {
-            "kind": "calendar#event",
-            "start": {"dateTime": format_datetime(
-                i.start_time)},
-            "end": {
-                "dateTime": format_datetime(i.end_time)},
-            "summary": i.title,
-            "description": i.description
-        }
-        # Delete event from google calendar if it has already been
-        # added to google calendar (add later)
-
-        # Add event to google calendar
-        event = service.events().insert(calendarId='primary',
-                                        body=event_body).execute()
-
-        # Record event's google calendar event id (add later)
-
-    return redirect('cal:sync_menu')
-
-
-def sync_menu(request):
-    # add_event_to_google(2)
-    print(f'USER ID:{request.user.id}')
-    print(f'USER NAME:{request.user.username}')
-    return render(request, 'sync/sync_menu.html')
-
-
-def get_credentials():
-    print(dirname(__file__))
-    SCOPES = ['https://www.googleapis.com/auth/calendar']
-    # cred_filepath = join(dirname(__file__), "credentials.json")
-    # token_filepath = join(dirname(__file__), "token.json")
-    creds = None
-    if os.path.exists("token.json"):
-        creds = Credentials.from_authorized_user_file("token.json",
-                                                      SCOPES)
-    # If there are no (valid) credentials available, let the user log
-    # in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                join(dirname(__file__), "credentials.json"), SCOPES)
-            creds = flow.run_local_server(port=0)
-
-        # Save the credentials for the next run (re-enable later)
-        #with open("token.json", 'w') as token:
-            #token.write(creds.to_json())
-    return creds
