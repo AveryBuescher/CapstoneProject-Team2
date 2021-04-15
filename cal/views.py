@@ -14,7 +14,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
 from .models import *
-from .utils import Calendar
+from .utils import Calendar, Tasks
 from .forms import EventForm, CreateUserForm
 
 from cal.gcal_sync.format_datetime import format_datetime
@@ -55,8 +55,7 @@ def get_date(req_day):
 def prev_month(d):
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)
-    month = 'month=' + str(prev_month.year) + '-' + str(
-        prev_month.month)
+    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
     return month
 
 
@@ -64,11 +63,48 @@ def next_month(d):
     days_in_month = calendar.monthrange(d.year, d.month)[1]
     last = d.replace(day=days_in_month)
     next_month = last + timedelta(days=1)
-    month = 'month=' + str(next_month.year) + '-' + str(
-        next_month.month)
+    month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
 
+<<<<<<< HEAD
+class TaskView(generic.ListView):
+    model = Event
+    template_name = 'cal/taskview.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        d = get_date_tasks(self.request.GET.get('date', None))
+        tasks = Tasks(d.year, d.month, d.day, self.request.user.id)
+        html_tasks = tasks.formatweek()
+        context['task_list'] = mark_safe(html_tasks)
+        context['prev_week'] = prev_week(d)
+        context['next_week'] = next_week(d)
+        return context
+
+def get_date_tasks(req_day):
+    if req_day:
+        year, month, day = (int(x) for x in req_day.split('-'))
+        return date(year, month, day)
+    return datetime.today()
+
+
+def prev_week(d):
+    current = d
+    prev_week = current - timedelta(days=7)
+    date = 'date=' + str(prev_week.year) + '-' + str(prev_week.month) + '-' + str(prev_week.day)
+    return date
+
+
+def next_week(d):
+    current = d
+    next_week = current + timedelta(days=7)
+    date = 'date=' + str(next_week.year) + '-' + str(next_week.month) + '-' + str(next_week.day)
+    return date
+
+
+=======
+>>>>>>> main
 @login_required(login_url='login')
 def event(request, event_id=None):
     if event_id:
@@ -98,11 +134,10 @@ def registerPage(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request,
-                             'Account was created for ' + username)
+            messages.success(request,'Account was created for ' + username)
             return redirect('login')
 
-    context = {'form': form}
+    context = {'form':form}
     return render(request, 'registration/register.html', context)
 
 
