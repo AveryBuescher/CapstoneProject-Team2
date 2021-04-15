@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^$', login_required(views.CalendarView.as_view()), name='home'),
     url(r'^index/$', views.index, name='index'),
     url(r'^calendar/$', login_required(views.CalendarView.as_view()), name='calendar'),
+    url(r'^tasks/$', login_required(views.TaskView.as_view()), name='tasks'),
     url(r'^event/new/$', views.event, name='event_new'),
     url(r'^event/edit/(?P<event_id>\d+)/$', views.event, name='event_edit'),
 
