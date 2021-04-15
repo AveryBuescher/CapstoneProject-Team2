@@ -67,7 +67,7 @@ def next_month(d):
     return month
 
 
-<<<<<<< HEAD
+
 class TaskView(generic.ListView):
     model = Event
     template_name = 'cal/taskview.html'
@@ -103,8 +103,7 @@ def next_week(d):
     return date
 
 
-=======
->>>>>>> main
+
 @login_required(login_url='login')
 def event(request, event_id=None):
     if event_id:
