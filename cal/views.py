@@ -200,7 +200,6 @@ def add_events_to_google(request):
 
 
 def sync_menu(request):
-    # add_event_to_google(2)
     print(f'USER ID:{request.user.id}')
     print(f'USER NAME:{request.user.username}')
     return render(request, 'sync/sync_menu.html')
