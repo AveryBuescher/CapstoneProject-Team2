@@ -217,8 +217,10 @@ def get_credentials(user_id):
 
     if existing_creds:
         # Load creds if there are any for this user (add later)
+        foo = existing_creds.to_dict
+        del foo["the_user"]
         creds = Credentials.from_authorized_user_info(
-            existing_creds.to_dict(), SCOPES)
+            foo, SCOPES)
 
     # Let the user log in if there aren't any valid credentials
     if not creds or not creds.valid:
@@ -235,7 +237,7 @@ def get_credentials(user_id):
         # Create new entry in Token table if there isn't one for this
         # user, or just make a new one for this user if there isn't one
         # already. (part of saving creds for next run)
-        if len(Token.objects.filter(the_user_id=user_id)) > 0:
+        if not existing_creds:
             new_entry = Token(token=cred_dict['token'],
                               refresh_token=cred_dict['refresh_token'],
                               token_uri=cred_dict['token_uri'],
@@ -243,7 +245,7 @@ def get_credentials(user_id):
                               client_secret=cred_dict['client_secret'],
                               scopes=cred_dict['scopes'],
                               expiry=cred_dict['expiry'],
-                              the_user=user_id)
+                              the_user_id=user_id)
             new_entry.save()
         else:
             updated_entry = Token.objects.filter(the_user_id=user_id)
