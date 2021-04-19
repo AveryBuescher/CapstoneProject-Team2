@@ -14,6 +14,7 @@ class Event(models.Model):
     COLOR_CHOICES = [("dddddd","WHITE"),("ff4444","RED"), ("44ff44", "GREEN"), ("4444ff", "BLUE")]
     color = models.CharField(max_length=40, choices=COLOR_CHOICES, default="WHITE")
     the_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    gcal_id = models.TextField(max_length=1024, null=True, blank=True)
 
     @property
     def get_html_url(self):
