@@ -24,6 +24,8 @@ from os.path import dirname, join
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
+from cal.models import Token
+import json
 
 
 def index(request):
@@ -204,7 +206,59 @@ def sync_menu(request):
     print(f'USER NAME:{request.user.username}')
     return render(request, 'sync/sync_menu.html')
 
+def get_credentials(user_id):
+    SCOPES = ['https://www.googleapis.com/auth/calendar']
+    creds = None
+    existing_creds = None
+    try:
+        existing_creds = Token.objects.get(the_user_id=user_id)
+    except:
+        existing_creds = None
 
+    if existing_creds:
+        # Load creds if there are any for this user (add later)
+        creds = Credentials.from_authorized_user_info(
+            existing_creds.to_dict(), SCOPES)
+
+    # Let the user log in if there aren't any valid credentials
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                join(dirname(__file__), "credentials.json"), SCOPES)
+            creds = flow.run_local_server(port=0)
+            print(type(json.loads(creds.to_json())))
+
+        # Save credentials for next run
+        cred_dict = json.loads(creds.to_json())
+        # Create new entry in Token table if there isn't one for this
+        # user, or just make a new one for this user if there isn't one
+        # already. (part of saving creds for next run)
+        if len(Token.objects.filter(the_user_id=user_id)) > 0:
+            new_entry = Token(token=cred_dict['token'],
+                              refresh_token=cred_dict['refresh_token'],
+                              token_uri=cred_dict['token_uri'],
+                              client_id=cred_dict['client_id'],
+                              client_secret=cred_dict['client_secret'],
+                              scopes=cred_dict['scopes'],
+                              expiry=cred_dict['expiry'],
+                              the_user=user_id)
+            new_entry.save()
+        else:
+            updated_entry = Token.objects.filter(the_user_id=user_id)
+            updated_entry.token = cred_dict['token']
+            updated_entry.refresh_token = cred_dict['refresh_token']
+            updated_entry.token_uri = cred_dict['token_uri']
+            updated_entry.client_id = cred_dict['client_id']
+            updated_entry.client_secret = cred_dict['client_secret']
+            updated_entry.scopes = cred_dict['scopes']
+            updated_entry.expiry = cred_dict['expiry']
+            updated_entry.save()
+
+    return creds
+
+"""
 def get_credentials():
     print(dirname(__file__))
     SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -227,4 +281,4 @@ def get_credentials():
         # Save the credentials for the next run (re-enable later)
         #with open("token.json", 'w') as token:
             #token.write(creds.to_json())
-    return creds
+    return creds"""

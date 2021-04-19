@@ -33,3 +33,16 @@ class Token(models.Model):
     the_user = models.ForeignKey(User, on_delete=models.CASCADE,
                                  null=False, blank=False)
 
+    @property
+    def to_dict(self):
+        return {
+            "token": self.token,
+            "refresh_token": self.refresh_token,
+            "token_uri": self.token_uri,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "scopes": self.scopes,
+            "expiry": self.expiry,
+            "the_user": self.the_user
+        }
+

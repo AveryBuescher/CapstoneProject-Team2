@@ -6,6 +6,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
+from cal.models import Token
 
 
 # Returns user's credentials if they are already saved. Lets the user
@@ -17,6 +18,7 @@ def get_credentials():
     creds = None
     if os.path.exists(token_filepath):
         creds = Credentials.from_authorized_user_file(token_filepath, SCOPES)
+        print(creds.to_json())
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
