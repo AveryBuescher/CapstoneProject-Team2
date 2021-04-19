@@ -20,3 +20,16 @@ class Event(models.Model):
     def get_html_url(self):
         url = reverse('cal:event_edit', args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
+
+
+class Token(models.Model):
+    token = models.TextField()
+    refresh_token = models.TextField()
+    token_uri = models.TextField()
+    client_id = models.TextField()
+    client_secret = models.TextField()
+    scopes = models.TextField()
+    expiry = models.TextField()
+    the_user = models.ForeignKey(User, on_delete=models.CASCADE,
+                                 null=False, blank=False)
+
