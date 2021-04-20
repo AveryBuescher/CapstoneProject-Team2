@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from cal.gcal_sync.format_datetime import format_datetime
 
 # Create your models here.
 
@@ -20,6 +21,18 @@ class Event(models.Model):
     def get_html_url(self):
         url = reverse('cal:event_edit', args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
+
+    @property
+    def to_gcal_body(self):
+        return {
+            "kind": "calendar#event",
+            "start": {"dateTime": format_datetime(
+                self.start_time)},
+            "end": {
+                "dateTime": format_datetime(self.end_time)},
+            "summary": self.title,
+            "description": self.description
+        }
 
 
 class Token(models.Model):

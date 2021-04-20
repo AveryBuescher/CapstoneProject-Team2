@@ -163,6 +163,10 @@ def filter_events_by_date(start_date, end_date, user_id):
 
     return event_list
 
+# Adds an event from ProCal to google calendar
+def add_new_event(service, event):
+    return
+
 
 # Adds events that fall within a date-range specified by the user from
 # the app to google calendar.
@@ -178,6 +182,7 @@ def add_events_to_google(request):
     for i in event_list:
         print('AAAAAAAABBBBBBBCCCCCCC')
         print(i.start_time)
+        print(type(i.start_time))
         print(i.end_time)
         print(i.description)
         event_body = {
@@ -189,14 +194,16 @@ def add_events_to_google(request):
             "summary": i.title,
             "description": i.description
         }
-        # Delete event from google calendar if it has already been
-        # added to google calendar (add later)
+        # If this event has already been synced to Google Calendar,
+        # the event gets updated. If it hasn't been synced already,
+        # it gets synced and its gcal_id gets recorded
+
+
 
         # Add event to google calendar
         event = service.events().insert(calendarId='primary',
                                         body=event_body).execute()
 
-        # Record event's google calendar event id (add later)
 
     return redirect('cal:sync_menu')
 
@@ -259,28 +266,3 @@ def get_credentials(user_id):
             updated_entry.save()
 
     return creds
-
-"""
-def get_credentials():
-    print(dirname(__file__))
-    SCOPES = ['https://www.googleapis.com/auth/calendar']
-    # cred_filepath = join(dirname(__file__), "credentials.json")
-    # token_filepath = join(dirname(__file__), "token.json")
-    creds = None
-    if os.path.exists("token.json"):
-        creds = Credentials.from_authorized_user_file("token.json",
-                                                      SCOPES)
-    # If there are no (valid) credentials available, let the user log
-    # in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                join(dirname(__file__), "credentials.json"), SCOPES)
-            creds = flow.run_local_server(port=0)
-
-        # Save the credentials for the next run (re-enable later)
-        #with open("token.json", 'w') as token:
-            #token.write(creds.to_json())
-    return creds"""
