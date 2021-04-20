@@ -25,10 +25,5 @@ urlpatterns = [
 
     #path('base/', views.dummy_action, name='dummy_action')
 
-
-
-
-
-
 ]
 
