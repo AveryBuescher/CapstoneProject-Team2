@@ -167,7 +167,7 @@ def filter_events_by_date(start_date, end_date, user_id):
 # Adds events that fall within a date-range specified by the user from
 # the app to google calendar.
 def add_events_to_google(request):
-    creds = get_credentials()
+    creds = get_credentials(request.user.id)
     service = build('calendar', 'v3', credentials=creds)
     event_list = filter_events_by_date(date.fromisoformat(
         request.POST['start_date']),
@@ -248,7 +248,7 @@ def get_credentials(user_id):
                               the_user_id=user_id)
             new_entry.save()
         else:
-            updated_entry = Token.objects.filter(the_user_id=user_id)
+            updated_entry = Token.objects.get(the_user_id=user_id)
             updated_entry.token = cred_dict['token']
             updated_entry.refresh_token = cred_dict['refresh_token']
             updated_entry.token_uri = cred_dict['token_uri']
