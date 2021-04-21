@@ -163,14 +163,26 @@ def filter_events_by_date(start_date, end_date, user_id):
 
     return event_list
 
-# Adds an event from ProCal to google calendar
-def add_new_event(service, event):
+# Adds an event from ProCal to google calendar and records the google
+# calendar event's gcal_id
+def add_new_event_to_google(service, event):
+    _event = service.events().insert(calendarId='primary',
+                                     body=event.to_gcal_body).execute()
+    event.gcal_id = service.events().get(calendarId='primary',
+                                         eventId=_event[
+                                             'id']).execute()['id']
+    event.save()
+    return
+
+def update_google_event(service, event):
+    _event = service.events().update(calendarId='primary',
+                                     eventId=event.gcal_id)
     return
 
 
 # Adds events that fall within a date-range specified by the user from
-# the app to google calendar.
-def add_events_to_google(request):
+# the app to google calendar and updates existing ones.
+def sync_to_google(request):
     creds = get_credentials(request.user.id)
     service = build('calendar', 'v3', credentials=creds)
     event_list = filter_events_by_date(date.fromisoformat(
@@ -185,15 +197,6 @@ def add_events_to_google(request):
         print(type(i.start_time))
         print(i.end_time)
         print(i.description)
-        event_body = {
-            "kind": "calendar#event",
-            "start": {"dateTime": format_datetime(
-                i.start_time)},
-            "end": {
-                "dateTime": format_datetime(i.end_time)},
-            "summary": i.title,
-            "description": i.description
-        }
         # If this event has already been synced to Google Calendar,
         # the event gets updated. If it hasn't been synced already,
         # it gets synced and its gcal_id gets recorded
@@ -201,8 +204,7 @@ def add_events_to_google(request):
 
 
         # Add event to google calendar
-        event = service.events().insert(calendarId='primary',
-                                        body=event_body).execute()
+        add_new_event_to_google(service=service, event=i)
 
 
     return redirect('cal:sync_menu')
