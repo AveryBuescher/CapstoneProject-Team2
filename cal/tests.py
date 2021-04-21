@@ -1,10 +1,18 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from .models import Event
 
-from .views import filter_events_by_date
+from .views import filter_events_by_date, add_new_event_to_google, \
+    sync_to_google, update_google_event, get_credentials
 from datetime import datetime, time, date
 from django.contrib.auth.models import User
 
+
+def quick_event_create(start_datetime, end_datetime, user_id):
+    foo = Event(title="Test Event", description="Test Event",
+                start_time=start_datetime,
+                end_time=end_datetime, the_user_id=user_id)
+    foo.save()
+    return foo
 
 class EventFilterTest(TestCase):
     def setUp(self):
@@ -49,3 +57,18 @@ class EventFilterTest(TestCase):
                                                         5), self.b_id)
         self.quick_assert_in_range(foo, False, self.a_id)
 
+
+class SyncTest(TestCase):
+    def setUp(self):
+        dummyc = User(password='password', username='dummyc')
+        dummyc.save()
+        self.c_id = dummyc.id
+        self.creds = get_credentials(self.c_id)
+        self.dummy_event = quick_event_create(datetime(1999, 7, 10),
+                                         datetime(1999, 7, 10),
+                                         self.c_id)
+
+    # Try adding the dummy event to google
+    def test_add_event_to_google(self):
+
+        return
