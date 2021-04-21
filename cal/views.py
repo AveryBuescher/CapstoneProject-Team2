@@ -180,15 +180,15 @@ def add_new_event_to_google(service, event):
 # event that has the same gcal_id on ProCal. Returns True if
 # succesful and False if it isn't
 def update_google_event(service, event):
+    if not event.gcal_id:
+        return False
+
     try:
         service.events().update(calendarId='primary',
                                         eventId=event.gcal_id,
                                         body=event.to_gcal_body).execute()
-    except HttpError as error:
-        print(error._get_reason())
-        return False
     except:
-        print("Something went wrong and it wasn't an HttpError")
+        print("Something went wrong")
         return False
 
     return True
@@ -197,6 +197,7 @@ def update_google_event(service, event):
 # Adds events that fall within a date-range specified by the user from
 # the app to google calendar and updates existing ones.
 def sync_to_google(request):
+    print("yeah this is happening")
     creds = get_credentials(request.user.id)
     service = build('calendar', 'v3', credentials=creds)
     event_list = filter_events_by_date(date.fromisoformat(
@@ -212,7 +213,6 @@ def sync_to_google(request):
         foo = update_google_event(service=service, event=i)
         if not foo:
             add_new_event_to_google(service=service, event=i)
-
 
     return redirect('cal:sync_menu')
 
