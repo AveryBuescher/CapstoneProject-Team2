@@ -1,6 +1,6 @@
 {% extends "cal/base.html" %}
 {% block content %}
-    <form action="{% url 'cal:add_events_to_google' %}" method="post">
+    <form action="{% url 'cal:sync_to_google' %}" method="post">
     {% csrf_token %}
         <p> Sync events that start on or after </p>
         <input type="date" id="start_date" name="start_date"><br>
