@@ -13,6 +13,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
+
 from .models import *
 from .utils import Calendar, Tasks
 from .forms import EventForm, CreateUserForm
@@ -26,6 +27,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from cal.models import Token
 import json
+from googleapiclient.errors import HttpError
 
 
 def index(request):
@@ -172,12 +174,24 @@ def add_new_event_to_google(service, event):
                                          eventId=_event[
                                              'id']).execute()['id']
     event.save()
-    return
+    return event
 
+# Updates an event on Google Calendar using information from the
+# event that has the same gcal_id on ProCal. Returns True if
+# succesful and False if it isn't
 def update_google_event(service, event):
-    _event = service.events().update(calendarId='primary',
-                                     eventId=event.gcal_id)
-    return
+    try:
+        service.events().update(calendarId='primary',
+                                        eventId=event.gcal_id,
+                                        body=event.to_gcal_body).execute()
+    except HttpError as error:
+        print(error._get_reason())
+        return False
+    except:
+        print("Something went wrong and it wasn't an HttpError")
+        return False
+
+    return True
 
 
 # Adds events that fall within a date-range specified by the user from
@@ -192,19 +206,12 @@ def sync_to_google(request):
     print(len(event_list))
 
     for i in event_list:
-        print('AAAAAAAABBBBBBBCCCCCCC')
-        print(i.start_time)
-        print(type(i.start_time))
-        print(i.end_time)
-        print(i.description)
         # If this event has already been synced to Google Calendar,
         # the event gets updated. If it hasn't been synced already,
         # it gets synced and its gcal_id gets recorded
-
-
-
-        # Add event to google calendar
-        add_new_event_to_google(service=service, event=i)
+        foo = update_google_event(service=service, event=i)
+        if not foo:
+            add_new_event_to_google(service=service, event=i)
 
 
     return redirect('cal:sync_menu')
