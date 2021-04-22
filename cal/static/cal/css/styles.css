@@ -4,6 +4,7 @@ body {
   --bkg-color: #efefef;
   --border-color: #222;
   --calendar-picker: 0;
+    --temp-text-color:#222
 }
 
 body.dark-theme {
@@ -11,6 +12,7 @@ body.dark-theme {
   --bkg-color: #212121;
   --border-color: #17a2b8;
   --calendar-picker: 1;
+    --temp-text-color: #17a2b8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,12 +22,14 @@ body.dark-theme {
     --bkg-color: #212121;
     --border-color: #17a2b8;
     --calendar-picker: 1;
+      --temp-text-color: #17a2b8;
   }
   body.light-theme {
     --text-color: #222;
     --bkg-color: #efefef;
     --border-color: #222;
     --calendar-picker: 0;
+      --temp-text-color:#222
   }
 }
 
@@ -49,9 +53,15 @@ table {
   color: var(--text-color);
 }
 
+input[type=”date”]::-webkit-calendar-picker-indicator{
+    filter: invert(var(--calendar-picker));
+}
+
 ::-webkit-calendar-picker-indicator {
     filter: invert(var(--calendar-picker));
 }
+
+
 
 .left {
   float: left;
@@ -88,6 +98,14 @@ table {
   color: var(--text-color);
 }
 
+#id_category {
+    color: var(--temp-text-color)
+}
+
+#id_color {
+    color: var(--temp-text-color)
+}
+
 .divContainer{
   text-align: center;
 }
@@ -97,6 +115,12 @@ table {
   text-align: left;
 }
 
+.syncDate{
+    color: var(--text-color);
+    background-color: var(--bkg-color);
+    border-color: var(--border-color);
+    border-width: 1px;
+}
 /* App styles */
 .title {
   text-align: center;
@@ -164,7 +188,6 @@ a {
   margin: 15px;
 }
 
-<<<<<<< HEAD
 /* Task list stuff */
 
 .page-todo .container {
@@ -557,5 +580,4 @@ a {
         font-size: 12px
     }
 }
-=======
->>>>>>> main
+
